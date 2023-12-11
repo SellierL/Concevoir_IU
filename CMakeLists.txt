@@ -19,7 +19,12 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        maforme.cpp
+        maforme.h
+        maforme.ui
 )
+
+qt_add_resources(PROJECT_SOURCES ressources.qrc)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(IU1
