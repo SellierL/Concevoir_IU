@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "maforme.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -7,30 +8,29 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // Instancie ma propre fenêtre de message personnalisée
+    this->FormMessage = new maforme() ;
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete FormMessage;
+}
+
+void MainWindow::testForm()
+{
+    QPushButton *clickedButton = qobject_cast<QPushButton *>(sender());
+    clickedButton->setText("affichage form widget");
+    bool vis = this->FormMessage->isVisible();
+    this->FormMessage->setVisible(true);
+    vis = this->FormMessage->isVisible();
+    this->FormMessage->show();
 }
 
 
 void MainWindow::on_BoutonArret_clicked()
 {
-    QMessageBox msgBox;
-    msgBox.setText("Arrêt de l'application");
-    msgBox.setInformativeText("Voulez-vous vraiment arrêter l'application ?");
-    msgBox.setStandardButtons(QMessageBox::Yes);
-    int ret = msgBox.exec();
-    // On vérifie si l'utilisateur a cliqué sur Yes
-
-    if ( ret == QMessageBox::Yes )
-    {
-    // traitement à exécuter pour arrêter l'application et fermer toutes les fenetres
-    }
-    else
-    {
-       //Fermer juste la fenetre msgBox
-    }
+    this->testForm();
 }
 
